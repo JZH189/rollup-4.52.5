@@ -1,0 +1,46 @@
+[package]
+name = "bindings_napi"
+version = "0.0.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
+napi = { version = "3.3.0", default-features = false, features = ["napi4"] }
+napi-derive = "3.2.5"
+parse_ast = { path = "../parse_ast" }
+xxhash = { path = "../xxhash" }
+
+[target.'cfg(not(any(target_os = "linux", target_os = "freebsd")))'.dependencies]
+mimalloc-safe = { version = "0.1.55" }
+
+# Readable version of the target specifier
+# cfg(
+# 	any(
+# 		all(
+# 			target_os = "linux",
+# 			not(target_arch = "loongarch64"),
+# 			not(all(target_arch = "riscv64", target_env = "musl")),
+# 			not(target_env = "ohos")
+# 		),
+# 		all(
+# 			target_os = "freebsd",
+# 			not(target_arch = "aarch64")
+# 		)
+# 	)
+# )
+[target.'cfg(any(all(target_os = "linux", not(target_arch = "loongarch64"), not(all(target_arch = "riscv64", target_env = "musl")), not(target_env = "ohos")), all(target_os = "freebsd", not(target_arch = "aarch64"))))'.dependencies]
+mimalloc-safe = { version = "0.1.55", features = ["local_dynamic_tls"] }
+
+# Disable architecture specific optimizations on aarch64 platforms
+# Mimalloc assumes `armv8.1-a` is supported, which is not always the case
+# Ref: https://github.com/rollup/rollup/issues/6047
+[target.'cfg(all(target_arch = "aarch64", not(target_vendor = "apple")))'.dependencies]
+mimalloc-safe = { version = "0.1.55", features = ["no_opt_arch"] }
+
+[build-dependencies]
+napi-build = "2.2.3"

@@ -1,0 +1,43 @@
+{
+  "name": "@rollup/browser",
+  "version": "4.52.5",
+  "description": "Next-generation ES module bundler browser build",
+  "main": "dist/rollup.browser.js",
+  "module": "dist/es/rollup.browser.js",
+  "types": "dist/rollup.browser.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rollup/rollup.git"
+  },
+  "keywords": [
+    "modules",
+    "bundler",
+    "bundling",
+    "es6",
+    "optimizer",
+    "browser"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rollup/rollup/issues"
+  },
+  "homepage": "https://rollupjs.org/",
+  "dependencies": {
+    "@types/estree": "1.0.8"
+  },
+  "files": [
+    "dist/**/*.wasm",
+    "dist/**/*.js",
+    "dist/*.d.ts",
+    "dist/es/package.json",
+    "dist/rollup.browser.js.map"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/rollup.browser.d.ts",
+      "import": "./dist/es/rollup.browser.js",
+      "require": "./dist/rollup.browser.js"
+    },
+    "./dist/*": "./dist/*"
+  }
+}

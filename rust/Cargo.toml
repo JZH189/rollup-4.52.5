@@ -1,0 +1,14 @@
+[workspace]
+resolver = "2"
+members = [
+    "bindings_napi",
+    "bindings_wasm",
+    "parse_ast",
+    "xxhash"
+]
+
+[profile.release]
+strip = true
+lto = true
+opt-level = 3
+codegen-units = 1

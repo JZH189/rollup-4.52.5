@@ -1,0 +1,11 @@
+{
+  "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "typescript.format.insertSpaceAfterConstructor": true,
+  "typescript.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "references.preferredLocation": "peek",
+  "vue.features.codeActions.enable": false,
+  "git.ignoreLimitWarning": true
+}
