@@ -1,8 +1,8 @@
 const { rollup } = require('../dist/rollup');
 
 const outputOption = {
-	format: 'es',
-	file: './es.js'
+	file: './es.js',
+	format: 'es'
 };
 
 async function build() {
